@@ -24,7 +24,7 @@ namespace BetterExtension.Runtime
         /// Changing state of mouse cursor
         /// </summary>
         /// <param name="state"></param>
-        public static void SetActive(bool state)
+        public static void SetCursorActive(bool state)
         {
             Cursor.lockState = state ? CursorLockMode.Confined : CursorLockMode.Locked;
             Cursor.visible = state;

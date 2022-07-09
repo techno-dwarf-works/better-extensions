@@ -6,6 +6,14 @@ namespace BetterExtension.Runtime
 {
     public static class AudioClipExtensions
     {
+        /// <summary>
+        /// Creates clip form uncompressed bytes
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="name"></param>
+        /// <param name="channels"></param>
+        /// <param name="frequency"></param>
+        /// <returns></returns>
         public static AudioClip FromByteArray(this byte[] array, string name, int channels, int frequency)
         {
             var audioClipData = new float[array.Length / sizeof(float)];
@@ -18,6 +26,11 @@ namespace BetterExtension.Runtime
             return audioClip;
         }
 
+        /// <summary>
+        /// Converts audio clip to uncompressed bytes
+        /// </summary>
+        /// <param name="audioClip"></param>
+        /// <returns></returns>
         public static byte[] ToByteArray(this AudioClip audioClip)
         {
             var audioClipData = new float[audioClip.samples * audioClip.channels];
@@ -28,6 +41,12 @@ namespace BetterExtension.Runtime
             return uncompressedData;
         }
 
+        /// <summary>
+        /// Removes part of audio clip
+        /// </summary>
+        /// <param name="audioClip"></param>
+        /// <param name="trimLengthSeconds"></param>
+        /// <returns></returns>
         public static AudioClip Trim(this AudioClip audioClip, float trimLengthSeconds)
         {
             if (audioClip.length <= trimLengthSeconds)
@@ -52,6 +71,11 @@ namespace BetterExtension.Runtime
             return newAudioClip;
         }
 
+        /// <summary>
+        /// Amplifying audio clip volume
+        /// </summary>
+        /// <param name="audioClip"></param>
+        /// <param name="amplificationRatio"></param>
         public static void Amplify(this AudioClip audioClip, float amplificationRatio)
         {
             if (amplificationRatio <= 0.0f)
@@ -70,6 +94,14 @@ namespace BetterExtension.Runtime
             audioClip.SetData(data, 0);
         }
 
+        /// <summary>
+        /// Async version of <see cref="FromByteArray"/>
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="name"></param>
+        /// <param name="channels"></param>
+        /// <param name="frequency"></param>
+        /// <returns></returns>
         public static async Task<AudioClip> FromByteArrayAsync(this byte[] array, string name, int channels,
             int frequency)
         {
@@ -82,6 +114,11 @@ namespace BetterExtension.Runtime
             return audioClip;
         }
 
+        /// <summary>
+        /// Async version of <see cref="ToByteArray"/>
+        /// </summary>
+        /// <param name="audioClip"></param>
+        /// <returns></returns>
         public static async Task<byte[]> ToByteArrayAsync(this AudioClip audioClip)
         {
             var audioClipData = new float[audioClip.samples * audioClip.channels];
@@ -106,6 +143,11 @@ namespace BetterExtension.Runtime
             return audioClipData;
         }
 
+        /// <summary>
+        /// Async version of <see cref="Amplify"/>
+        /// </summary>
+        /// <param name="audioClip"></param>
+        /// <param name="amplificationRatio"></param>
         public static async Task AmplifyAsync(this AudioClip audioClip, float amplificationRatio)
         {
             if (amplificationRatio <= 0.0f)
