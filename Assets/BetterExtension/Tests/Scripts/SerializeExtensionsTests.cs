@@ -33,7 +33,7 @@ namespace BetterExtension.Tests
         private void Test(TestClass testClass)
         {
             var debugString = new StringBuilder();
-            debugString.AppendLine($"{nameof(Test)} started");
+            debugString.AppendLine($"{nameof(SerializeExtensionsTests)}.{nameof(Test)} started");
             
             var stopwatch = Stopwatch.StartNew();
             stopwatch.Start();
@@ -71,7 +71,7 @@ namespace BetterExtension.Tests
         private async void TestAsync(TestClass testClass)
         {
             var debugString = new StringBuilder();
-            debugString.AppendLine($"{nameof(TestAsync)} started");
+            debugString.AppendLine($"{nameof(SerializeExtensionsTests)}.{nameof(TestAsync)} started");
             
             var stopwatch = Stopwatch.StartNew();
             stopwatch.Start();
