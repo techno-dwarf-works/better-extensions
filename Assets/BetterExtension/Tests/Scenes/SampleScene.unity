@@ -335,7 +335,8 @@ MonoBehaviour:
     testString: Some test
   audioClipExtensionsTests:
     testClip: {fileID: 8300000, guid: 900c1035639da04488d52b34c495e38a, type: 3}
-    audioSource: {fileID: 1616464766}
+    audioClips: []
+  audioSource: {fileID: 1616464766}
   start: 0
 --- !u!4 &1616464765
 Transform:
