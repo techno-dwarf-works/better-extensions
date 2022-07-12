@@ -34,12 +34,12 @@ namespace BetterExtension.Runtime
         /// <returns></returns>
         public static string PrettyObjectName(this UnityEngine.Object input, params string[] remove)
         {
-            if (remove == null) return input.name.PrettyCamelCase();
+            if (remove == null) return input.name.ToPrettyCamelCase();
             foreach (var s in remove) input.name = input.name.Replace(s, string.Empty);
-            return input.name.PrettyCamelCase();
+            return input.name.ToPrettyCamelCase();
         }
 
-        public static string PrettyCamelCase(this string input)
+        public static string ToPrettyCamelCase(this string input)
         {
             return Regex.Replace(input.Replace("_", ""), "((?<!^)([A-Z][a-z]|(?<=[a-z])[A-Z]))", " $1").Trim();
         }
