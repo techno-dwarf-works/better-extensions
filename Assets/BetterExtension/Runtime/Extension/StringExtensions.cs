@@ -32,7 +32,7 @@ namespace BetterExtension.Runtime
         /// <param name="input"></param>
         /// <param name="remove"></param>
         /// <returns></returns>
-        public static string PrettyObjectName(this UnityEngine.Object input, params string[] remove)
+        public static string ToPrettyCamelCase(this UnityEngine.Object input, params string[] remove)
         {
             if (remove == null) return input.name.ToPrettyCamelCase();
             foreach (var s in remove) input.name = input.name.Replace(s, string.Empty);
