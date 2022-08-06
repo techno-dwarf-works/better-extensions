@@ -15,8 +15,9 @@ namespace BetterExtension.Runtime.AsyncExtension
 
         public void OnCompleted(Action continuation) => _asyncOperation.completed += _ => continuation();
 
-        public void GetResult()
+        public AsyncOperation GetResult()
         {
+            return _asyncOperation;
         }
     }
 }
