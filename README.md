@@ -1,5 +1,11 @@
 # Better Extensions
 
+## Install
+Window -> PackageManager -> Add package from GIT url...
+```
+https://github.com/uurha/BetterExtensions.git#upm
+```
+
 This package provides useful extension. Such as:
 
 ## Extensions:
