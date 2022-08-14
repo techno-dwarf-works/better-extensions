@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using BetterExtension.Runtime;
+using BuildNotification.BetterExtension.Runtime.Extension;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -44,14 +45,14 @@ namespace BetterExtension.Tests
             stopwatch.Reset();
             
             stopwatch.Start();
-            var compressed = serialized.Compress();
+            var compressed = serialized.CompressDeflate();
             stopwatch.Stop();
             
             debugString.AppendLine($"Compress passed. This took {stopwatch.ElapsedMilliseconds.ToString()} ms");
             stopwatch.Reset();
             
             stopwatch.Start();
-            var decompressed = compressed.Decompress();
+            var decompressed = compressed.DecompressDeflate();
             stopwatch.Stop();
             
             debugString.AppendLine($"Decompress passed. This took {stopwatch.ElapsedMilliseconds.ToString()} ms");
@@ -82,14 +83,14 @@ namespace BetterExtension.Tests
             stopwatch.Reset();
 
             stopwatch.Start();
-            var compressed = await serialized.CompressAsync();
+            var compressed = await serialized.CompressDeflateAsync();
             stopwatch.Stop();
             
             debugString.AppendLine($"CompressAsync passed. This took {stopwatch.ElapsedMilliseconds.ToString()} ms");
             stopwatch.Reset();
             
             stopwatch.Start();
-            var decompressed = await compressed.DecompressAsync();
+            var decompressed = await compressed.DecompressDeflateAsync();
             stopwatch.Stop();
             
             debugString.AppendLine($"DecompressAsync passed. This took {stopwatch.ElapsedMilliseconds.ToString()} ms");
