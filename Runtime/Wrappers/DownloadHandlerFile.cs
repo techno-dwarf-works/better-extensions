@@ -62,13 +62,18 @@ namespace BetterExtensions.Runtime.Wrappers
         {
             CloseStream();
         }
-
+#if UNITY_2021_3_OR_NEWER
         public override void Dispose()
         {
             CloseStream();
             base.Dispose();
         }
-
+#else
+        ~DownloadHandlerFile()
+        {
+            CloseStream();
+        }
+#endif
         private void CloseStream()
         {
             if (_stream == null) return;
