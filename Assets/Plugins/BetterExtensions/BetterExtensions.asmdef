@@ -1,6 +1,6 @@
 {
     "name": "BetterExtensions",
-    "rootNamespace": "BetterExtensions",
+    "rootNamespace": "",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
