@@ -1,12 +1,6 @@
 # Better Extensions
 
-## Install
-Window -> PackageManager -> Add package from GIT url...
-```
-https://github.com/uurha/BetterExtensions.git#upm
-```
-
-This package provides useful extension. Such as:
+This package provides useful extension.
 
 ## Extensions:
 1. AudioClipExtensions
@@ -36,3 +30,16 @@ This package provides useful extension. Such as:
 
 ## Wrappers:
 1. DownloadHandlerFile
+
+## Install
+Window -> PackageManager -> Add package from GIT url...
+```
+https://github.com/uurha/BetterExtensions.git#upm
+```
+or if you want some specific version
+```
+https://github.com/uurha/BetterExtensions.git#<version>
+```
+You can check versions [here](https://github.com/uurha/BetterExtensions/releases).
+
+Note: all versions related to tags. Use tag name, *NOT* release name.
