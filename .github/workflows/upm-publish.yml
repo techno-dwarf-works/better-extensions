@@ -2,8 +2,10 @@ name: Publish UPM Package
 
 # Controls when the workflow will run
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    branches:
+      - main
+    types: [closed]
     
   workflow_dispatch:
 
