@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 namespace BetterExtensions.Runtime.CustomComponents
 {
+    /// <summary>
+    /// Component to open URL inside TMPro.TMP_Text
+    /// </summary>
     [RequireComponent(typeof(TMP_Text))]
     public class LinkOpener : MonoBehaviour, IPointerClickHandler
     {

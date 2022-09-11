@@ -16,6 +16,8 @@ This package provides useful extension.
 3. StringExtensions
 4. UIExtension
     1. `CanvasGroup.SetActive`
+    2. Custom Components
+        1. `LinkOpener`
 5. TaskExtensions
     1. `TaskExtensions.WaitUntil`
     2. `TaskExtensions.WaitWhile`
