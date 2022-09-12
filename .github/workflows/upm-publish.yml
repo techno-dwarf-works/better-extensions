@@ -9,7 +9,9 @@ on:
     
   workflow_dispatch:
     inputs:
-      runManually: 
+      runManually:
+        description: 'Run Manually'     
+        required: true
         default: true
 
 jobs:
