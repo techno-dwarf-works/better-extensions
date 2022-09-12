@@ -8,21 +8,24 @@ on:
     types: [closed]
     
   workflow_dispatch:
+    inputs:
+      runManually: 
+        default: true
 
 jobs:
  deploy:
     name: Deploy
-    if: github.event.pull_request.merged == true
+    if: github.event.inputs.runManually == true || github.event.pull_request.merged == true
     runs-on: ubuntu-latest    
     steps:
     
     - uses: actions/checkout@master
     - name: Copy the README
       run: |
-          cp "README.md" "./Assets/Plugins/${GITHUB_REPOSITORY#*/}/README.md"
+          cp "README.md" "Assets/Plugins/${GITHUB_REPOSITORY#*/}/README.md"
     - name: Copy the LICENSE
       run: |
-          cp "LICENSE" "./Assets/Plugins/${GITHUB_REPOSITORY#*/}/LICENSE"
+          cp "LICENSE" "Assets/Plugins/${GITHUB_REPOSITORY#*/}/LICENSE"
     - name: Verify Changed files
       uses: tj-actions/verify-changed-files@v11.1
       id: verify-changed-files
