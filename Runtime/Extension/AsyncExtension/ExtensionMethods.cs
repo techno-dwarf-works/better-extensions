@@ -19,5 +19,10 @@ namespace BetterExtensions.Runtime.Extension.AsyncExtension
         {
             return new AssetBundleRequestAwaiter(asyncOp);
         }
+        
+        public static ResourceRequestAwaiter GetAwaiter(this ResourceRequest asyncOp)
+        {
+            return new ResourceRequestAwaiter(asyncOp);
+        }
     }
 }
