@@ -34,6 +34,27 @@ This package provides useful extension.
 1. DownloadHandlerFile
 
 ## Install
+Project Settins -> Package Manager -> Scoped registries
+</br>
+
+![image](https://user-images.githubusercontent.com/22265817/197616090-163dc7ee-99ce-414e-8c20-0264923e955a.png)
+
+```json
+"scopedRegistries": [
+    {
+      "name": "Arcueid Plugins",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.uurha"
+      ]
+    }
+  ]
+```
+
+Window -> PackageManager -> Packages: My Registries -> Arcueid Plugins -> BetterExtensions
+
+or
+
 Window -> PackageManager -> Add package from GIT url...
 ```
 https://github.com/uurha/BetterExtensions.git#upm
