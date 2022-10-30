@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace BetterExtensions.Runtime.Extension
@@ -24,6 +25,11 @@ namespace BetterExtensions.Runtime.Extension
                 default:
                     return input.First().ToString().ToUpper() + input.Substring(1);
             }
+        }
+        
+        public static string PrettyMemberName(this MemberInfo input)
+        {
+            return input.Name.PrettyCamelCase();
         }
 
         /// <summary>
