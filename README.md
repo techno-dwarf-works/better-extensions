@@ -34,7 +34,7 @@ This package provides useful extension.
 1. DownloadHandlerFile
 
 ## Install
-Project Settins -> Package Manager -> Scoped registries
+Project Settings -> Package Manager -> Scoped registries
 </br>
 
 ![image](https://user-images.githubusercontent.com/22265817/197618796-e4f99403-e119-4f35-8320-b233696496d9.png)
