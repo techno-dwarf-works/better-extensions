@@ -1,5 +1,5 @@
 # Better Extensions
-
+[![openupm](https://img.shields.io/npm/v/com.uurha.betterextensions?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.uurha.betterextensions/)
 This package provides useful extension.
 
 ## Extensions:
