@@ -2,4 +2,4 @@
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cplugins/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cplugins_005Cbetterextensions/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cplugins_005Cbetterextensions_005Cruntime_005Ccustomcomponents/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cplugins_005Cbetterextensions_005Cruntime_005Ccustomcomponents_005Ctmp_005Fextensions/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cplugins_005Cbetterextensions_005Cruntime_005Ccustomcomponents_005Ctmp_005Fextensions/@EntryIndexedValue">False</s:Boolean></wpf:ResourceDictionary>
