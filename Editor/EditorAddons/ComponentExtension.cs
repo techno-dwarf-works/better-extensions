@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace BetterExtensions.EditorAddons
+namespace Better.Extensions.EditorAddons
 {
     public static class ComponentExtension
     {

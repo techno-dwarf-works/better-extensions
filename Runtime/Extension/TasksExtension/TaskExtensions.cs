@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace BetterExtensions.Runtime.Extension.TasksExtension
+namespace Better.Extensions.Runtime.Extension.TasksExtension
 {
     public static class TaskExtensions
     {

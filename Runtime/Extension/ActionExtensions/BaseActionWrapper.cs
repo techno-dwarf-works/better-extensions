@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BetterExtensions.Runtime.Extension.ActionExtensions
+namespace Better.Extensions.Runtime.Extension.ActionExtensions
 {
     internal abstract class BaseActionWrapper<T>
     {
