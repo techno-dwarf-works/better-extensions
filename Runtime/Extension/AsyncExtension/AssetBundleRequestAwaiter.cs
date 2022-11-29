@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Better.Extensions.Runtime.Extension.AsyncExtension
+namespace Better.Extensions.Runtime.AsyncExtension
 {
     [DebuggerNonUserCode]
     public readonly struct AssetBundleRequestAwaiter : INotifyCompletion

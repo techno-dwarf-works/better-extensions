@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using BetterExtensions.Runtime.Extension;
+using Better.Extensions.Runtime;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
