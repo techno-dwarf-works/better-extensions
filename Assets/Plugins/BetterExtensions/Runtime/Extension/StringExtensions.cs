@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace Better.Extensions.Runtime.Extension
+namespace Better.Extensions.Runtime
 {
     public static class StringExtensions
     {

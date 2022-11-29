@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
-namespace Better.Extensions.Runtime.Extension.ActionExtensions
+namespace Better.Extensions.Runtime.ActionExtensions
 {
     public static class ActionAwaiter
     {

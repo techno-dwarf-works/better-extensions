@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Better.Extensions.Runtime.Extension
+namespace Better.Extensions.Runtime
 {
     public static class SerializeExtensions
     {

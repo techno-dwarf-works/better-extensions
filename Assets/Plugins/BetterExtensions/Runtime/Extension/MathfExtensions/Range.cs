@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Better.Extensions.Runtime.Extension.MathfExtensions
+namespace Better.Extensions.Runtime.MathfExtensions
 {
     [Serializable]
     public struct Range<T> where T : new()

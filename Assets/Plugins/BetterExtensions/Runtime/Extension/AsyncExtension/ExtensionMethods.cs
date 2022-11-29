@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Better.Extensions.Runtime.Extension.AsyncExtension
+namespace Better.Extensions.Runtime.AsyncExtension
 {
     public static class ExtensionMethods
     {

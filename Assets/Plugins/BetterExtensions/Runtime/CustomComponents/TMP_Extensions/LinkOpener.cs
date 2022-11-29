@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Runtime.CustomComponents
+namespace Runtime
 {
     /// <summary>
     /// Component to open URL inside TMPro.TMP_Text
