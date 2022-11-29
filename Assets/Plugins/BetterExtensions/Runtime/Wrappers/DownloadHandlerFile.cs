@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace BetterExtensions.Runtime.Wrappers
+namespace Better.Extensions.Runtime.Wrappers
 {
     /// <summary>
     /// This class allows to load file directly to file without loading file into memory.

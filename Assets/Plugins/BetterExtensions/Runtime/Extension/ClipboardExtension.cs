@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace BetterExtensions.Runtime.Extension
+namespace Better.Extensions.Runtime.Extension
 {
     public static class ClipboardExtension
     {

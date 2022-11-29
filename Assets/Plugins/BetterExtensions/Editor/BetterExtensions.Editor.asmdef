@@ -1,6 +1,6 @@
 {
     "name": "BetterExtensions.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "Better.Extensions",
     "references": [],
     "includePlatforms": [
         "Editor"

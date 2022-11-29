@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine.Events;
 
-namespace BetterExtensions.Runtime.Extension.ActionExtensions
+namespace Better.Extensions.Runtime.Extension.ActionExtensions
 {
     internal class UnityEventWrapper<T> : BaseActionWrapper<T>
     {
