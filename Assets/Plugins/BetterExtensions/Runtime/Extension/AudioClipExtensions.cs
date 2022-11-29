@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BetterExtensions.Runtime.Extension
+namespace Better.Extensions.Runtime.Extension
 {
     public static class AudioClipExtensions
     {

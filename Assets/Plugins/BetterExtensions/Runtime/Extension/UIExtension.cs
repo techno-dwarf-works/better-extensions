@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace BetterExtensions.Runtime.Extension
+namespace Better.Extensions.Runtime.Extension
 {
     /// <summary>
     /// UI state tool for canvas groups

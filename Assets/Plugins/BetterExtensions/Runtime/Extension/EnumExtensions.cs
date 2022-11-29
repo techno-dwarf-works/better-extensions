@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace BetterExtensions.Runtime.Extension
+namespace Better.Extensions.Runtime.Extension
 {
     public static class EnumExtensions
     {

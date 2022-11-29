@@ -11,6 +11,7 @@
   "changelogUrl": "https://github.com/uurha/BetterExtensions",
   "documentationUrl": "https://github.com/uurha/BetterExtensions/tree/main#readme",
   "license": "MIT",
+  "licensesUrl":"https://github.com/uurha/BetterExtensions/blob/main/LICENSE",
   "keywords": [
     "extensions",
     "asynchronous"

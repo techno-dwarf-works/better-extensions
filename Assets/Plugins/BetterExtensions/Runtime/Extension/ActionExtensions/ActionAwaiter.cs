@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine.Events;
 
-namespace BetterExtensions.Runtime.Extension.ActionExtensions
+namespace Better.Extensions.Runtime.Extension.ActionExtensions
 {
     public static class ActionAwaiter
     {
