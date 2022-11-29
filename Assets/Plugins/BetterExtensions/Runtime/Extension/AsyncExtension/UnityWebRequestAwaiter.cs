@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEngine.Networking;
 
-namespace Better.Extensions.Runtime.Extension.AsyncExtension
+namespace Better.Extensions.Runtime.AsyncExtension
 {
     [DebuggerNonUserCode]
     public readonly struct UnityWebRequestAwaiter : INotifyCompletion

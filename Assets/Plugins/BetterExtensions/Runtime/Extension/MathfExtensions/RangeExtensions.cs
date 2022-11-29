@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Better.Extensions.Runtime.Extension.MathfExtensions
+namespace Better.Extensions.Runtime.MathfExtensions
 {
     public static class RangeExtensions
     {

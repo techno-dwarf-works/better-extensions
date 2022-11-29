@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Better.Extensions.Runtime.Extension.AsyncExtension
+namespace Better.Extensions.Runtime.AsyncExtension
 {
     [DebuggerNonUserCode]
     public readonly struct ResourceRequestAwaiter : INotifyCompletion

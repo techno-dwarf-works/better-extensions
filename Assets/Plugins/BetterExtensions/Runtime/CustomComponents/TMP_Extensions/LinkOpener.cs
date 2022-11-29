@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Runtime.CustomComponents
+namespace Better.Extensions.Runtime.TMP_Extensions
 {
     /// <summary>
     /// Component to open URL inside TMPro.TMP_Text
