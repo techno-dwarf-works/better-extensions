@@ -52,18 +52,4 @@ Project Settings -> Package Manager -> Scoped registries
   ]
 ```
 
-Window -> PackageManager -> Packages: My Registries -> Arcueid Plugins -> BetterExtensions
-
-or
-
-Window -> PackageManager -> Add package from GIT url...
-```
-https://github.com/uurha/BetterExtensions.git#upm
-```
-or if you want some specific version
-```
-https://github.com/uurha/BetterExtensions.git#<version>
-```
-You can check versions [here](https://github.com/uurha/BetterExtensions/releases).
-
-Note: all versions related to tags. Use tag name, *NOT* release name.
+Window -> PackageManager -> Packages: My Registries -> Arcueid Plugins -> Better Extensions
