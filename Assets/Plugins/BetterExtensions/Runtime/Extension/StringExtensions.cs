@@ -26,6 +26,17 @@ namespace Better.Extensions.Runtime
                     return input.First().ToString().ToUpper() + input.Substring(1);
             }
         }
+
+        /// <summary>
+        /// Fast Equals based on CompareOrdinal string comparetion
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool FastEquals(this string left, string right)
+        {
+            return string.CompareOrdinal(left, right) == 0;
+        }
         
         public static string PrettyMemberName(this MemberInfo input)
         {
