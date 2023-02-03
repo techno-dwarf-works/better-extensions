@@ -2,7 +2,7 @@
   "name": "com.uurha.betterextensions",
   "displayName": "Better Extensions",
   "description": "Unity extensions, serialize extension, async extension, string extension and UI extensions",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "unity": "2018.3",
   "author": {
     "name": "Arcueid D'athemon",
