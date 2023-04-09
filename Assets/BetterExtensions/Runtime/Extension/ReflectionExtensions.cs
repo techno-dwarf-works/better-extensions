@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Better.Extensions.Runtime
 {
@@ -16,6 +17,7 @@ namespace Better.Extensions.Runtime
             {
                 return true;
             }
+
             return false;
         }
 
@@ -26,11 +28,27 @@ namespace Better.Extensions.Runtime
                 return listType.GetElementType();
             }
 
-            if (listType.IsGenericType && listType.GetGenericTypeDefinition() == typeof(List<>))
+            var type = listType.GetGenericTypeDefinition();
+            if (listType.IsGenericType && type == typeof(List<>))
             {
                 return listType.GetGenericArguments()[0];
             }
+
             return null;
+        }
+
+        public static bool IsArrayOrList(this FieldInfo fieldInfo)
+        {
+            if (fieldInfo == null)
+                return false;
+            return fieldInfo.FieldType.IsArrayOrList();
+        }
+
+        public static Type GetArrayOrListElementType(this FieldInfo fieldInfo)
+        {
+            if (fieldInfo == null)
+                return null;
+            return fieldInfo.FieldType.GetArrayOrListElementType();
         }
     }
 }
