@@ -22,7 +22,7 @@ namespace Better.Extensions.Runtime
             return false;
         }
         
-        public static Type[] GetAllInheritedType(Type baseType)
+        public static Type[] GetAllInheritedType(this Type baseType)
         {
             return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => ArgIsValueType(baseType, p)).ToArray();
         }
