@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.Collections;
+﻿using Unity.Collections;
 using UnityEngine;
 
 namespace Better.Extensions.Runtime.MathfExtensions
@@ -259,7 +258,7 @@ namespace Better.Extensions.Runtime.MathfExtensions
 
             return new LineIntersection(intersectsOnLines, intersectsOnSegments);
         }
-        
+
         public static Vector3 Average(NativeArray<Vector3> vectors)
         {
             var t = Vector3.zero;
@@ -271,7 +270,7 @@ namespace Better.Extensions.Runtime.MathfExtensions
 
             return t / vectors.Length;
         }
-        
+
         public static Vector3 Average(params Vector3[] vectors)
         {
             var t = Vector3.zero;
@@ -290,33 +289,5 @@ namespace Better.Extensions.Runtime.MathfExtensions
             var t = start + end;
             return t / 2;
         }
-        
-        [Serializable]
-    public struct Range<T> where T : new()
-    {
-        [SerializeField] private T min;
-        [SerializeField] private T max;
-
-        public T Min => min;
-        public T Max => max;
-
-        public Range(T minValue, T maxValue)
-        {
-            min = minValue;
-            max = maxValue;
-        }
-
-        public Range<T> UpdateMax(T maxValue)
-        {
-            max = maxValue;
-            return this;
-        }
-
-        public Range<T> UpdateMin(T minValue)
-        {
-            min = minValue;
-            return this;
-        }
-    }
     }
 }
