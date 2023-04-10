@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Better.Extensions.Runtime
@@ -19,6 +20,23 @@ namespace Better.Extensions.Runtime
             }
 
             return false;
+        }
+        
+        public static Type[] GetAllInheritedType(Type baseType)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => ArgIsValueType(baseType, p)).ToArray();
+        }
+
+        private static bool ArgIsValueType(Type baseType, Type iterateValue)
+        {
+            return CheckType(baseType, iterateValue) &&
+                   (iterateValue.IsClass || iterateValue.IsValueType) &&
+                   !iterateValue.IsAbstract && !iterateValue.IsSubclassOf(typeof(UnityEngine.Object));
+        }
+
+        private static bool CheckType(Type baseType, Type p)
+        {
+            return baseType.IsAssignableFrom(p);
         }
 
         public static Type GetArrayOrListElementType(this Type listType)
