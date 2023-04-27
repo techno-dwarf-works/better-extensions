@@ -3,74 +3,6 @@ using UnityEngine;
 
 namespace Better.Extensions.Runtime
 {
-     /// <summary>
-    /// Reference to a class <see cref="System.Type"/> with Unity serialization.
-    /// </summary>
-    [Serializable]
-    public class SerializedType<T> : SerializedType, ISerializationCallbackReceiver
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SerializedType"/> class.
-        /// </summary>
-        /// <param name="qualifiedTypeName">Assembly qualified class name.</param>
-        public SerializedType(string qualifiedTypeName)
-        {
-            ValidateStringType(qualifiedTypeName);
-            ValidateParentType(_type);
-            fullQualifiedName = qualifiedTypeName;
-        }
-
-        private static void ValidateParentType(Type buffer)
-        {
-            if (!typeof(T).IsAssignableFrom(buffer) || buffer != typeof(T))
-            {
-                throw new Exception($"{buffer.Name} is not subclass of {typeof(T).Name}");
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SerializedType"/> class.
-        /// </summary>
-        /// <param name="type">Class type.</param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="type"/> is not a class type.
-        /// </exception>
-        public SerializedType(Type type)
-        {
-            ValidateParentType(type);
-            _type = type;
-            fullQualifiedName = type.AssemblyQualifiedName;
-        }
-
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
-        {
-            if (!string.IsNullOrEmpty(fullQualifiedName))
-            {
-                _type = Type.GetType(fullQualifiedName);
-                if (_type == null)
-                {
-#if UNITY_EDITOR
-                    Debug.LogWarning($"'{fullQualifiedName}' class type not found.");
-#endif
-                }
-            }
-            else
-            {
-                _type = null;
-            }
-        }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-        }
-
-        public static implicit operator string(SerializedType<T> typeReference) => typeReference.fullQualifiedName;
-
-        public static implicit operator Type(SerializedType<T> typeReference) => typeReference.Type;
-
-        public static implicit operator SerializedType<T>(Type type) => new SerializedType<T>(type);
-    }
-    
     /// <summary>
     /// Reference to a class <see cref="System.Type"/> with Unity serialization.
     /// </summary>
@@ -79,7 +11,7 @@ namespace Better.Extensions.Runtime
     {
         [SerializeField] private protected string fullQualifiedName;
 
-        private protected Type _type;
+        private Type _type;
 
         protected SerializedType()
         {
