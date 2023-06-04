@@ -46,8 +46,7 @@ namespace Better.Extensions.Runtime
                 return listType.GetElementType();
             }
 
-            var type = listType.GetGenericTypeDefinition();
-            if (listType.IsGenericType && type == typeof(List<>))
+            if (listType.IsGenericType && listType.GetGenericTypeDefinition() == typeof(List<>))
             {
                 return listType.GetGenericArguments()[0];
             }
