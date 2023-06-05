@@ -21,7 +21,7 @@ namespace Better.Extensions.Runtime
 
             return false;
         }
-        
+
         public static Type[] GetAllInheritedType(this Type baseType)
         {
             return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => ArgIsValueType(baseType, p)).ToArray();
@@ -52,6 +52,14 @@ namespace Better.Extensions.Runtime
             }
 
             return null;
+        }
+
+        public static Type GetFieldOrElementType(this FieldInfo fieldInfo)
+        {
+            if (fieldInfo.IsArrayOrList())
+                return fieldInfo.GetArrayOrListElementType();
+
+            return fieldInfo.FieldType;
         }
 
         public static bool IsArrayOrList(this FieldInfo fieldInfo)
