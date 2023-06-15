@@ -24,14 +24,24 @@ namespace Better.Extensions.Runtime
 
         public static Type[] GetAllInheritedType(this Type baseType)
         {
-            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => ArgIsValueType(baseType, p)).ToArray();
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => ValidateType(baseType, p)).ToArray();
+        }
+        
+        public static Type[] GetAllInheritedTypeWithUnityObjects(this Type baseType)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => ValidateTypeWithUnityObject(baseType, p)).ToArray();
         }
 
-        private static bool ArgIsValueType(Type baseType, Type iterateValue)
+        private static bool ValidateTypeWithUnityObject(Type baseType, Type iterateValue)
         {
             return CheckType(baseType, iterateValue) &&
                    (iterateValue.IsClass || iterateValue.IsValueType) &&
-                   !iterateValue.IsAbstract && !iterateValue.IsSubclassOf(typeof(UnityEngine.Object));
+                   !iterateValue.IsAbstract;
+        }
+        
+        private static bool ValidateType(Type baseType, Type iterateValue)
+        {
+            return ValidateTypeWithUnityObject(baseType, iterateValue) && !iterateValue.IsSubclassOf(typeof(UnityEngine.Object));
         }
 
         private static bool CheckType(Type baseType, Type p)
