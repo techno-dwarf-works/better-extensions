@@ -13,7 +13,7 @@ namespace Better.Extensions.Runtime
 
         private Type _type;
 
-        protected SerializedType()
+        public SerializedType()
         {
         }
         
