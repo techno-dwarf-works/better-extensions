@@ -30,7 +30,7 @@ namespace Better.Extensions.Runtime.ActionExtensions
             return buffer.Initialize();
         }        
         
-        public static Task Await<T>(this UnityEvent action, T data, CancellationToken cancellationToken = default)
+        public static Task<T> Await<T>(this UnityEvent action, T data, CancellationToken cancellationToken = default)
         {
             var taskCompletionSource = new TaskCompletionSource<T>();
             var buffer = new UnityEventDataWrapper<T>(taskCompletionSource, ref action, data);
