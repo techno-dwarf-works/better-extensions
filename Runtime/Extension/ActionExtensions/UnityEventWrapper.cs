@@ -31,7 +31,7 @@ namespace Better.Extensions.Runtime.ActionExtensions
             _taskCompletionSource.TrySetResult(result);
         }
     }
-    
+
     internal class UnityEventWrapper : BaseActionWrapper<bool>
     {
         private UnityEvent _action;
