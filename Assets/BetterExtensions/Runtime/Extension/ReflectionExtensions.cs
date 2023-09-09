@@ -22,6 +22,21 @@ namespace Better.Extensions.Runtime
             return false;
         }
 
+        public static object GetDefault(this Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+
+            if (type == typeof(string))
+            {
+                return string.Empty;
+            }
+
+            return null;
+        }
+
         public static Type[] GetAllInheritedType(this Type baseType)
         {
             return AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(p => ValidateType(baseType, p)).ToArray();
