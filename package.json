@@ -2,16 +2,16 @@
   "name": "com.uurha.betterextensions",
   "displayName": "Better Extensions",
   "description": "Unity extensions, serialize extension, async extension, string extension and UI extensions",
-  "version": "1.1.92",
+  "version": "1.1.93",
   "unity": "2020.1",
   "author": {
-    "name": "Arcueid D'athemon",
-    "url": "https://github.com/uurha"
+    "name": "Better Plugins",
+    "url": "https://github.com/techno-dwarf-works"
   },
-  "changelogUrl": "https://github.com/uurha/BetterExtensions",
-  "documentationUrl": "https://github.com/uurha/BetterExtensions/tree/main#readme",
+  "changelogUrl": "https://github.com/techno-dwarf-works/better-extensions",
+  "documentationUrl": "https://github.com/techno-dwarf-works/better-extensions/tree/main#readme",
   "license": "MIT",
-  "licensesUrl":"https://github.com/uurha/BetterExtensions/blob/main/LICENSE",
+  "licensesUrl":"https://github.com/techno-dwarf-works/better-extensions/blob/main/LICENSE",
   "keywords": [
     "extensions",
     "asynchronous"
