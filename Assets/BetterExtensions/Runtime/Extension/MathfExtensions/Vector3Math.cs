@@ -5,6 +5,46 @@ namespace Better.Extensions.Runtime.MathfExtensions
 {
     public struct Vector3Math
     {
+        public static Quaternion Validate(Quaternion rotation)
+        {
+            if (IsNormalized(rotation))
+            {
+                return rotation;
+            }
+
+            return Quaternion.identity;
+        }
+
+        public static bool IsNormalized(Quaternion quaternion)
+        {
+            var magnitudeSquared = quaternion.x * quaternion.x + quaternion.y * quaternion.y + quaternion.z * quaternion.z + quaternion.w * quaternion.w;
+            return Mathf.Approximately(magnitudeSquared, 1.0f);
+        }
+
+        public static bool Approximately(Vector3 current, Vector3 other)
+        {
+            return Mathf.Approximately(current.x, other.x) &&
+                   Mathf.Approximately(current.y, other.y) &&
+                   Mathf.Approximately(current.z, other.z);
+        }
+
+        public static bool Approximately(Vector2 current, Vector2 other)
+        {
+            return Mathf.Approximately(current.x, other.x) &&
+                   Mathf.Approximately(current.y, other.y);
+        }
+
+        public static bool Approximately(Bounds current, Bounds other)
+        {
+            return Approximately(current.center, other.center) &&
+                   Approximately(current.size, other.size);
+        }
+
+        public static bool Approximately(Quaternion current, Quaternion other)
+        {
+            return Mathf.Approximately(Quaternion.Dot(current, other), 1.0f);
+        }
+
         /// <summary>
         /// Take projection of point on Plane
         /// </summary>
