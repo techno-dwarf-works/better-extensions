@@ -20,7 +20,7 @@ namespace Better.Extensions.Runtime.MathfExtensions
             var magnitudeSquared = quaternion.x * quaternion.x + quaternion.y * quaternion.y + quaternion.z * quaternion.z + quaternion.w * quaternion.w;
             return Mathf.Approximately(magnitudeSquared, 1.0f);
         }
-        
+
         public static bool Approximately(Vector3 current, Vector3 other)
         {
             return Mathf.Approximately(current.x, other.x) &&
@@ -28,29 +28,23 @@ namespace Better.Extensions.Runtime.MathfExtensions
                    Mathf.Approximately(current.z, other.z);
         }
 
-        // Extension method for Vector2
         public static bool Approximately(Vector2 current, Vector2 other)
         {
             return Mathf.Approximately(current.x, other.x) &&
                    Mathf.Approximately(current.y, other.y);
         }
 
-        // Extension method for Bounds
         public static bool Approximately(Bounds current, Bounds other)
         {
             return Approximately(current.center, other.center) &&
                    Approximately(current.size, other.size);
         }
 
-        // Extension method for Quaternion
         public static bool Approximately(Quaternion current, Quaternion other)
         {
-            return Mathf.Approximately(current.x, other.x) &&
-                   Mathf.Approximately(current.y, other.y) &&
-                   Mathf.Approximately(current.z, other.z) &&
-                   Mathf.Approximately(current.w, other.w);
+            return Mathf.Approximately(Quaternion.Dot(current, other), 1.0f);
         }
-        
+
         /// <summary>
         /// Take projection of point on Plane
         /// </summary>
