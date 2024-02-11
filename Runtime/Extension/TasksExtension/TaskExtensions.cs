@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Better.Extensions.Runtime.TasksExtension
@@ -6,7 +7,7 @@ namespace Better.Extensions.Runtime.TasksExtension
     public static class TaskExtensions
     {
         /// <summary>
-        ///     Blocks while condition is true or timeout occurs.
+        /// Blocks while condition is true or timeout occurs.
         /// </summary>
         /// <param name="condition">The condition that will perpetuate the block.</param>
         /// <param name="frequency">The frequency at which the condition will be check, in milliseconds.</param>
@@ -17,15 +18,15 @@ namespace Better.Extensions.Runtime.TasksExtension
         {
             var waitTask = Task.Run(async () =>
             {
-                while (condition()) 
+                while (condition())
                     await Task.Delay(frequency);
             });
-            if (waitTask != await Task.WhenAny(waitTask, Task.Delay(timeout))) 
+            if (waitTask != await Task.WhenAny(waitTask, Task.Delay(timeout)))
                 throw new TimeoutException();
         }
 
         /// <summary>
-        ///     Blocks until condition is true or timeout occurs.
+        /// Blocks until condition is true or timeout occurs.
         /// </summary>
         /// <param name="condition">The break condition.</param>
         /// <param name="frequency">The frequency at which the condition will be checked.</param>
@@ -35,7 +36,7 @@ namespace Better.Extensions.Runtime.TasksExtension
         {
             var waitTask = Task.Run(async () =>
             {
-                while (!condition()) 
+                while (!condition())
                     await Task.Delay(frequency);
             });
 
@@ -44,7 +45,7 @@ namespace Better.Extensions.Runtime.TasksExtension
         }
 
         /// <summary>
-        ///     Creates task with factory method
+        /// Creates task with factory method
         /// </summary>
         /// <param name="action"></param>
         /// <typeparam name="T"></typeparam>
@@ -52,6 +53,11 @@ namespace Better.Extensions.Runtime.TasksExtension
         public static Task<T> CreateTask<T>(this Func<T> action)
         {
             return Task<T>.Factory.StartNew(action);
+        }
+
+        public static Task WhenAll(this IEnumerable<Task> tasks)
+        {
+            return Task.WhenAll(tasks);
         }
     }
 }
