@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Better.Extensions.Runtime.TasksExtension
 {
@@ -44,6 +46,11 @@ namespace Better.Extensions.Runtime.TasksExtension
                 throw new TimeoutException();
         }
 
+        public static async void Forget(this Task task)
+        {
+            await task;
+        }
+        
         /// <summary>
         /// Creates task with factory method
         /// </summary>
@@ -58,6 +65,27 @@ namespace Better.Extensions.Runtime.TasksExtension
         public static Task WhenAll(this IEnumerable<Task> tasks)
         {
             return Task.WhenAll(tasks);
+        }
+        
+        public static Task<T[]> WhenAll<T>(this IEnumerable<Task<T>> tasks)
+        {
+            return Task.WhenAll(tasks);
+        }
+
+        public static Task WhenAny(this IEnumerable<Task> tasks)
+        {
+            return Task.WhenAny(tasks);
+        }
+        
+        public static async Task<T> WhenAny<T>(this IEnumerable<Task<T>> tasks)
+        {
+            var task = await Task.WhenAny(tasks);
+            return await task;
+        }
+        
+        public static Task WaitForSeconds(float seconds, CancellationToken cancellationToken = default)
+        {
+            return Task.Delay(Mathf.RoundToInt(seconds * 1000), cancellationToken);
         }
     }
 }
