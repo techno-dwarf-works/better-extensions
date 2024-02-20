@@ -50,7 +50,7 @@ namespace Better.Extensions.Runtime.TasksExtension
         {
             await task;
         }
-        
+
         /// <summary>
         /// Creates task with factory method
         /// </summary>
@@ -66,7 +66,7 @@ namespace Better.Extensions.Runtime.TasksExtension
         {
             return Task.WhenAll(tasks);
         }
-        
+
         public static Task<T[]> WhenAll<T>(this IEnumerable<Task<T>> tasks)
         {
             return Task.WhenAll(tasks);
@@ -76,13 +76,13 @@ namespace Better.Extensions.Runtime.TasksExtension
         {
             return Task.WhenAny(tasks);
         }
-        
+
         public static async Task<T> WhenAny<T>(this IEnumerable<Task<T>> tasks)
         {
             var task = await Task.WhenAny(tasks);
             return await task;
         }
-        
+
         public static Task WaitForSeconds(float seconds, CancellationToken cancellationToken = default)
         {
             return Task.Delay(Mathf.RoundToInt(seconds * 1000), cancellationToken);
