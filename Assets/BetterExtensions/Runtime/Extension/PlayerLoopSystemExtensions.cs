@@ -185,5 +185,74 @@ namespace Better.Extensions
             var subSystemType = typeof(TSubSystem);
             return loopSystem.RemoveSubSystemRecursive(subSystemType);
         }
+
+        public static bool UnsubscribeRecursive(this ref PlayerLoopSystem loopSystem, PlayerLoopSystem.UpdateFunction updateFunction)
+        {
+            var result = false;
+#if UNITY_EDITOR
+            var invocationList = loopSystem.updateDelegate.GetInvocationList();
+            if (invocationList.Contains(updateFunction))
+            {
+                loopSystem.updateDelegate -= updateFunction;
+                result = true;
+            }
+#else
+                    loopSystem.updateDelegate -= updateFunction;
+                    result = true;
+#endif
+
+            var subSystems = loopSystem.subSystemList;
+            if (subSystems != null)
+            {
+                for (int i = 0; i < subSystems.Length; i++)
+                {
+                    if (subSystems[i].UnsubscribeRecursive(updateFunction))
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static bool UnsubscribeRecursive(this ref PlayerLoopSystem loopSystem, Type loopType, PlayerLoopSystem.UpdateFunction updateFunction)
+        {
+            var result = false;
+            if (loopSystem.type == loopType)
+            {
+#if UNITY_EDITOR
+                var invocationList = loopSystem.updateDelegate.GetInvocationList();
+                if (invocationList.Contains(updateFunction))
+                {
+                    loopSystem.updateDelegate -= updateFunction;
+                    result = true;
+                }
+#else
+                    loopSystem.updateDelegate -= updateFunction;
+                    result = true;
+#endif
+            }
+
+            var subSystems = loopSystem.subSystemList;
+            if (subSystems != null)
+            {
+                for (int i = 0; i < subSystems.Length; i++)
+                {
+                    if (subSystems[i].UnsubscribeRecursive(loopType, updateFunction))
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static bool UnsubscribeRecursive<TLoop>(this ref PlayerLoopSystem loopSystem, PlayerLoopSystem.UpdateFunction updateFunction)
+        {
+            var loopType = typeof(TLoop);
+            return loopSystem.UnsubscribeRecursive(loopType, updateFunction);
+        }
     }
 }

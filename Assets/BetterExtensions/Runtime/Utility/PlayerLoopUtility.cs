@@ -13,6 +13,13 @@ namespace Better.Extensions
         {
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
             ref var loopSystem = ref currentSystem.GetSubSystem(loopType);
+            if (loopSystem.type != loopType)
+            {
+                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(SubscribeToLoop)}: not found {nameof(loopType)}({loopType.Name})";
+                Debug.LogWarning(message);
+                return;
+            }
+
             loopSystem.updateDelegate += updateFunction;
             PlayerLoop.SetPlayerLoop(currentSystem);
         }
@@ -26,8 +33,14 @@ namespace Better.Extensions
         public static void UnsubscribeFromLoop(Type loopType, PlayerLoopSystem.UpdateFunction updateFunction)
         {
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
-            ref var loopSystem = ref currentSystem.GetSubSystem(loopType);
-            loopSystem.updateDelegate -= updateFunction;
+            var hasAnyChanges = currentSystem.UnsubscribeRecursive(loopType, updateFunction);
+            if (!hasAnyChanges)
+            {
+                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(UnsubscribeFromLoop)}: not found {nameof(loopType)}({loopType.Name}) for unsubscribing";
+                Debug.LogWarning(message);
+                return;
+            }
+
             PlayerLoop.SetPlayerLoop(currentSystem);
         }
 
@@ -35,6 +48,68 @@ namespace Better.Extensions
         {
             var loopType = typeof(TLoop);
             UnsubscribeFromLoop(loopType, updateFunction);
+        }
+
+        public static void Unsubscribe(PlayerLoopSystem.UpdateFunction updateFunction)
+        {
+            var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
+            var hasAnyChanges = currentSystem.UnsubscribeRecursive(updateFunction);
+            if (!hasAnyChanges)
+            {
+                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(Unsubscribe)}: not found any loops for unsubscribing";
+                Debug.LogWarning(message);
+                return;
+            }
+
+            PlayerLoop.SetPlayerLoop(currentSystem);
+        }
+
+        #endregion
+
+        #region Add
+
+        public static void AddSubLoop(Type sourceLoopType, Type destinationLoopType, PlayerLoopSystem.UpdateFunction updateFunction)
+        {
+            var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
+            ref var sourceSystem = ref currentSystem.GetSubSystem(sourceLoopType);
+            if (sourceSystem.type != sourceLoopType)
+            {
+                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(AddSubLoop)}: not found {nameof(sourceLoopType)}({sourceLoopType.Name})";
+                Debug.LogWarning(message);
+                return;
+            }
+
+            var destinationSystem = new PlayerLoopSystem
+            {
+                type = destinationLoopType,
+                updateDelegate = updateFunction
+            };
+
+            if (sourceSystem.subSystemList == null)
+            {
+                sourceSystem.subSystemList = new[] { destinationSystem };
+            }
+            else if (sourceSystem.HasSubSystemOf(destinationLoopType))
+            {
+                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(AddSubLoop)}: {nameof(sourceLoopType)}({sourceLoopType.Name}) already contains {nameof(destinationLoopType)}{destinationLoopType}";
+                Debug.LogWarning(message);
+                return;
+            }
+            else
+            {
+                var subSystems = sourceSystem.subSystemList.ToList();
+                subSystems.Add(destinationSystem);
+                sourceSystem.subSystemList = subSystems.ToArray();
+            }
+
+            PlayerLoop.SetPlayerLoop(currentSystem);
+        }
+
+        public static void AddSubLoop<TLoopSource, TLoopDestination>(PlayerLoopSystem.UpdateFunction updateFunction)
+        {
+            var sourceType = typeof(TLoopSource);
+            var destinationType = typeof(TLoopDestination);
+            AddSubLoop(sourceType, destinationType, updateFunction);
         }
 
         #endregion
@@ -111,7 +186,7 @@ namespace Better.Extensions
 
         #region Remove
 
-        public static bool Remove(Type loopType)
+        public static bool RemoveLoop(Type loopType)
         {
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
             var anyRemoved = currentSystem.RemoveSubSystemRecursive(loopType);
@@ -123,10 +198,10 @@ namespace Better.Extensions
             return anyRemoved;
         }
 
-        public static bool Remove<TLoop>()
+        public static bool RemoveLoop<TLoop>()
         {
             var loopType = typeof(TLoop);
-            return Remove(loopType);
+            return RemoveLoop(loopType);
         }
 
         #endregion
