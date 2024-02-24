@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 using UnityEngine.LowLevel;
 
-namespace Better.Extensions
+namespace Better.Extensions.Runtime
 {
     public static class PlayerLoopUtility
     {
@@ -71,7 +72,7 @@ namespace Better.Extensions
         public static void AddSubLoop(Type sourceLoopType, Type destinationLoopType, PlayerLoopSystem.UpdateFunction updateFunction)
         {
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
-            ref var sourceSystem = ref currentSystem.GetSubSystem(sourceLoopType);
+            ref var sourceSystem = ref currentSystem.GetSubSystemRecursive(sourceLoopType);
             if (sourceSystem.type != sourceLoopType)
             {
                 var message = $"[{nameof(PlayerLoopUtility)}] {nameof(AddSubLoop)}: not found {nameof(sourceLoopType)}({sourceLoopType.Name})";
@@ -146,7 +147,7 @@ namespace Better.Extensions
             ref var parentSystem = ref currentSystem.GetParentSystemRecursiveOf(sourceLoopType);
 
             var sourceSubIndex = parentSystem.FindSubSystemIndex(sourceLoopType);
-            if (sourceSubIndex < 0)
+            if (sourceSubIndex == -1)
             {
                 var message = $"[{nameof(PlayerLoopUtility)}] {nameof(InsertLoopWithOffset)}: not found {nameof(sourceLoopType)}({sourceLoopType.Name})";
                 Debug.LogWarning(message);

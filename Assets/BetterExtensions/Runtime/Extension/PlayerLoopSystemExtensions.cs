@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.LowLevel;
 
-namespace Better.Extensions
+namespace Better.Extensions.Runtime
 {
     // TODO: Add summary for possible result self-ref
     public static class PlayerLoopSystemExtensions
@@ -141,7 +142,7 @@ namespace Better.Extensions
             var subSystems = loopSystem.subSystemList.ToList();
             for (var i = subSystems.Count - 1; i >= 0; i--)
             {
-                if (subSystems[i].type != subSystemType)
+                if (subSystems[i].type == subSystemType)
                 {
                     subSystems.RemoveAt(i);
                     anyRemoved = true;
