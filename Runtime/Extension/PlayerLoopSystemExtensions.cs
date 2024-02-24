@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.LowLevel;
 
-namespace Better.Extensions
+namespace Better.Extensions.Runtime
 {
     // TODO: Add summary for possible result self-ref
     public static class PlayerLoopSystemExtensions
@@ -141,7 +142,7 @@ namespace Better.Extensions
             var subSystems = loopSystem.subSystemList.ToList();
             for (var i = subSystems.Count - 1; i >= 0; i--)
             {
-                if (subSystems[i].type != subSystemType)
+                if (subSystems[i].type == subSystemType)
                 {
                     subSystems.RemoveAt(i);
                     anyRemoved = true;
@@ -253,6 +254,26 @@ namespace Better.Extensions
         {
             var loopType = typeof(TLoop);
             return loopSystem.UnsubscribeRecursive(loopType, updateFunction);
+        }
+        
+        public static Type[] GetTypes(this ref PlayerLoopSystem loopSystem)
+        {
+            var loopTypes = new List<Type>();
+            loopSystem.CollectTypesRecursive(ref loopTypes);
+            return loopTypes.ToArray();
+        }
+
+        private static void CollectTypesRecursive(this ref PlayerLoopSystem loopSystem, ref List<Type> loopTypes)
+        {
+            loopTypes.Add(loopSystem.type);
+
+            var subSystems = loopSystem.subSystemList;
+            if (subSystems == null) return;
+
+            for (int i = 0; i < subSystems.Length; i++)
+            {
+                subSystems[i].CollectTypesRecursive(ref loopTypes);
+            }
         }
     }
 }
