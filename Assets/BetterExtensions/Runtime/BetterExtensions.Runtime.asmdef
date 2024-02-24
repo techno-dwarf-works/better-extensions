@@ -1,6 +1,6 @@
 {
     "name": "BetterExtensions.Runtime",
-    "rootNamespace": "Better.Extensions",
+    "rootNamespace": "Better.Extensions.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
