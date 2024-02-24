@@ -206,5 +206,32 @@ namespace Better.Extensions.Runtime
         }
 
         #endregion
+
+        #region Logging
+
+        public static void LogCurrentPlayerLoopTypes(string message, LogType logType = LogType.Log)
+        {
+            var currentLoop = PlayerLoop.GetCurrentPlayerLoop();
+            var loopTypes = currentLoop.GetTypes();
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine(message);
+            stringBuilder.Append("Loops count: ");
+            stringBuilder.AppendLine(loopTypes.Length);
+            foreach (var loopType in loopTypes)
+            {
+                if (loopType == null)
+                {
+                    stringBuilder.AppendLine("Empty(null)");
+                    continue;
+                }
+
+                stringBuilder.AppendLine(loopType.Name);
+            }
+
+            Debug.unityLogger.Log(logType, stringBuilder);
+        }
+
+        #endregion
     }
 }

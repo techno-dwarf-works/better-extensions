@@ -255,5 +255,25 @@ namespace Better.Extensions.Runtime
             var loopType = typeof(TLoop);
             return loopSystem.UnsubscribeRecursive(loopType, updateFunction);
         }
+        
+        public static Type[] GetTypes(this ref PlayerLoopSystem loopSystem)
+        {
+            var loopTypes = new List<Type>();
+            loopSystem.CollectTypesRecursive(ref loopTypes);
+            return loopTypes.ToArray();
+        }
+
+        private static void CollectTypesRecursive(this ref PlayerLoopSystem loopSystem, ref List<Type> loopTypes)
+        {
+            loopTypes.Add(loopSystem.type);
+
+            var subSystems = loopSystem.subSystemList;
+            if (subSystems == null) return;
+
+            for (int i = 0; i < subSystems.Length; i++)
+            {
+                subSystems[i].CollectTypesRecursive(ref loopTypes);
+            }
+        }
     }
 }
