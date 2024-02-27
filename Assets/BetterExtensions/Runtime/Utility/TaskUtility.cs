@@ -1,14 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 
-namespace Better.Extensions.Runtime.Utility
+namespace Better.Extensions.Runtime
 {
     public static class TaskUtility
     {
         public static Task WaitForSeconds(float seconds, CancellationToken cancellationToken = default)
         {
-            return Task.Delay(Mathf.RoundToInt(seconds * 1000), cancellationToken);
+            var millisecondsDelay = TimeUtility.SecondsToMilliseconds(seconds);
+            return Task.Delay(millisecondsDelay, cancellationToken);
         }
     }
 }
