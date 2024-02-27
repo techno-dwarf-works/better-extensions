@@ -1,15 +1,16 @@
-using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Better.Extensions.Runtime
 {
     public static class AssetDatabaseUtility
     {
+#if UNITY_EDITOR
+        public const string AssetsPath = "Assets";
+        public const string AssetExtension = ".asset";
+
         private const string PrefabFilter = "t:prefab";
-        private const string ScriptableObjectFilter = "t:ScriptableObject";
 
         public static T[] FindPrefabsOfType<T>()
         {
@@ -31,22 +32,9 @@ namespace Better.Extensions.Runtime
             return prefabs.ToArray();
         }
 
-        public static T[] FindScriptableObjectsOfType<T>() where T : ScriptableObject
-        {
-            return FindAssetsOfType<T>(ScriptableObjectFilter);
-        }
-
         public static T[] FindAssetsOfType<T>(string filter) where T : Object
         {
-            if (filter.IsNullOrEmpty() || filter.IsNullOrWhiteSpace())
-            {
-                var message = $"{nameof(filter)} cannot be Null or Empty";
-                DebugUtility.LogException<ArgumentException>(message);
-                return Array.Empty<T>();
-            }
-
             var assets = new List<T>();
-#if UNITY_EDITOR
             var guids = AssetDatabase.FindAssets(filter);
 
             foreach (var guid in guids)
@@ -60,9 +48,15 @@ namespace Better.Extensions.Runtime
                 }
             }
 
-#endif
-
             return assets.ToArray();
         }
+
+        public static T[] FindAssetsOfType<T>() where T : Object
+        {
+            var typeName = typeof(T).Name;
+            var filter = $"t:{typeName}";
+            return FindAssetsOfType<T>(filter);
+        }
+#endif
     }
 }
