@@ -12,6 +12,12 @@ namespace Better.Extensions.Runtime
 
         public static void SubscribeToLoop(Type loopType, PlayerLoopSystem.UpdateFunction updateFunction)
         {
+            if (updateFunction == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(updateFunction));
+                return;
+            }
+
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
             ref var loopSystem = ref currentSystem.GetSubSystem(loopType);
             if (loopSystem.type != loopType)
@@ -33,6 +39,12 @@ namespace Better.Extensions.Runtime
 
         public static void UnsubscribeFromLoop(Type loopType, PlayerLoopSystem.UpdateFunction updateFunction)
         {
+            if (updateFunction == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(updateFunction));
+                return;
+            }
+
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
             var hasAnyChanges = currentSystem.UnsubscribeRecursive(loopType, updateFunction);
             if (!hasAnyChanges)
@@ -53,6 +65,12 @@ namespace Better.Extensions.Runtime
 
         public static void Unsubscribe(PlayerLoopSystem.UpdateFunction updateFunction)
         {
+            if (updateFunction == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(updateFunction));
+                return;
+            }
+
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
             var hasAnyChanges = currentSystem.UnsubscribeRecursive(updateFunction);
             if (!hasAnyChanges)
@@ -71,6 +89,12 @@ namespace Better.Extensions.Runtime
 
         public static void AddSubLoop(Type sourceLoopType, Type destinationLoopType, PlayerLoopSystem.UpdateFunction updateFunction)
         {
+            if (updateFunction == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(updateFunction));
+                return;
+            }
+
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
             ref var sourceSystem = ref currentSystem.GetSubSystemRecursive(sourceLoopType);
             if (sourceSystem.type != sourceLoopType)
@@ -108,6 +132,12 @@ namespace Better.Extensions.Runtime
 
         public static void AddSubLoop<TLoopSource, TLoopDestination>(PlayerLoopSystem.UpdateFunction updateFunction)
         {
+            if (updateFunction == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(updateFunction));
+                return;
+            }
+
             var sourceType = typeof(TLoopSource);
             var destinationType = typeof(TLoopDestination);
             AddSubLoop(sourceType, destinationType, updateFunction);
@@ -143,6 +173,12 @@ namespace Better.Extensions.Runtime
 
         private static void InsertLoopWithOffset(Type sourceLoopType, Type destinationLoopType, int insertOffset, PlayerLoopSystem.UpdateFunction updateFunction)
         {
+            if (updateFunction == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(updateFunction));
+                return;
+            }
+
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
             ref var parentSystem = ref currentSystem.GetParentSystemRecursiveOf(sourceLoopType);
 
