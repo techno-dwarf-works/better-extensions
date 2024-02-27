@@ -5,13 +5,13 @@
         /// <summary>
         /// Check that point in two other points
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="self"></param>
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <returns></returns>
-        private static bool InRange(this int value, int min, int max)
+        private static bool InRange(this int self, int min, int max)
         {
-            return IntUtility.InRange(value, min, max);
+            return IntUtility.InRange(self, min, max);
         }
     }
 }

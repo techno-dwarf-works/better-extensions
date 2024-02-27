@@ -6,8 +6,8 @@ namespace Better.Extensions.Runtime
     {
         public static bool Approximately(Bounds current, Bounds other)
         {
-            return VectorUtility.Approximately(current.center, other.center) &&
-                   VectorUtility.Approximately(current.size, other.size);
+            return current.center.Approximately(other.center) &&
+                   current.size.Approximately(other.size);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Better.Extensions.Runtime.TasksExtension
+namespace Better.Extensions.Runtime
 {
     public static class TaskExtensions
     {

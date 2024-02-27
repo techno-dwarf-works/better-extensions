@@ -26,7 +26,7 @@ namespace Better.Extensions.Runtime
             var values = Enum.GetValues(enumType);
             return values.ToEnumerable<Enum>();
         }
-
+        
         public static IEnumerable<TEnum> GetAllValues<TEnum>()
             where TEnum : Enum
         {

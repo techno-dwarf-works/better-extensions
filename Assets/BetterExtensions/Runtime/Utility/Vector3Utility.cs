@@ -5,19 +5,13 @@ using UnityEngine;
 
 namespace Better.Extensions.Runtime
 {
-    public struct VectorUtility
+    public struct Vector3Utility
     {
         public static bool Approximately(Vector3 current, Vector3 other)
         {
             return Mathf.Approximately(current.x, other.x) &&
                    Mathf.Approximately(current.y, other.y) &&
                    Mathf.Approximately(current.z, other.z);
-        }
-
-        public static bool Approximately(Vector2 current, Vector2 other)
-        {
-            return Mathf.Approximately(current.x, other.x) &&
-                   Mathf.Approximately(current.y, other.y);
         }
 
         /// <summary>
@@ -124,16 +118,27 @@ namespace Better.Extensions.Runtime
             return middlePoint + offset;
         }
 
-        public static Vector2 MiddlePoint(Vector2 start, Vector2 end)
+        public static float InverseLerp(Vector3 a, Vector3 b, Vector3 value)
         {
-            var t = start + end;
-            return t / 2;
+            if (a == b)
+            {
+                return default;
+            }
+
+            var ab = b - a;
+            var av = value - a;
+
+            var result = Vector3.Dot(av, ab) / Vector3.Dot(ab, ab);
+            return Mathf.Clamp01(result);
         }
 
-        public static Vector2 MiddlePoint(Vector2 start, Vector2 end, Vector2 offset)
+        public static Vector3 AxesInverseLerp(Vector3 a, Vector3 b, Vector3 value)
         {
-            var middlePoint = MiddlePoint(start, end);
-            return middlePoint + offset;
+            return new Vector3(
+                Mathf.InverseLerp(a.x, b.x, value.x),
+                Mathf.InverseLerp(a.y, b.y, value.y),
+                Mathf.InverseLerp(a.z, b.z, value.z)
+            );
         }
     }
 }
