@@ -135,6 +135,24 @@ namespace Better.Extensions.Runtime
 
             return self.GetAllInheritedTypes(unityObjectType);
         }
+        
+        public static IEnumerable<Type> GetAllInheritedTypesOfRawGeneric(this Type self)
+        {
+            if (self == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(self));
+                return null;
+            }
+
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => type.IsSubclassOfRawGeneric(self));
+        }
+
+        public static IEnumerable<Type> GetAllInheritedTypesOfRawGeneric(this Type self, params Type[] excludes)
+        {
+            return self.GetAllInheritedTypesOfRawGeneric().Except(excludes);
+        }
 
         public static bool IsSubclassOf<T>(this Type self)
         {
