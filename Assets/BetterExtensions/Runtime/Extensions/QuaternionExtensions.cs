@@ -13,5 +13,15 @@ namespace Better.Extensions.Runtime
         {
             return QuaternionUtility.Approximately(self, other);
         }
+
+        public static Quaternion Scale(this Quaternion self, Vector3 scale)
+        {
+            return QuaternionUtility.Scale(self, scale);
+        }
+
+        public static Quaternion Scale(this Quaternion self, float scale)
+        {
+            return QuaternionUtility.Scale(self, scale);
+        }
     }
 }

@@ -140,5 +140,31 @@ namespace Better.Extensions.Runtime
                 Mathf.InverseLerp(a.z, b.z, value.z)
             );
         }
+        
+        public static Vector3 Flat(Vector3 source)
+        {
+            source.y = default;
+            return source;
+        }
+
+        public static Vector3 Direction(Vector3 from, Vector3 to)
+        {
+            var difference = to - from;
+            return difference.normalized;
+        }
+
+        public static float SqrDistanceTo(Vector3 from, Vector3 to)
+        {
+            var difference = to - from;
+            return difference.sqrMagnitude;
+        }
+
+        public static Vector3 Abs(Vector3 self)
+        {
+            self.x = Mathf.Abs(self.x);
+            self.y = Mathf.Abs(self.y);
+            self.z = Mathf.Abs(self.z);
+            return self;
+        }
     }
 }
