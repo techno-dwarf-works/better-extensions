@@ -22,7 +22,7 @@ namespace Better.Extensions.Runtime
             ref var loopSystem = ref currentSystem.GetSubSystem(loopType);
             if (loopSystem.type != loopType)
             {
-                var message = $"not found {nameof(loopType)}({loopType.Name})";
+                var message = $"Not found {nameof(loopType)}({loopType.Name})";
                 Debug.LogWarning(message);
                 return;
             }
@@ -49,7 +49,7 @@ namespace Better.Extensions.Runtime
             var hasAnyChanges = currentSystem.UnsubscribeRecursive(loopType, updateFunction);
             if (!hasAnyChanges)
             {
-                var message = $"not found {nameof(loopType)}({loopType.Name}) for unsubscribing";
+                var message = $"Not found {nameof(loopType)}({loopType.Name}) for unsubscribing";
                 Debug.LogWarning(message);
                 return;
             }
@@ -75,7 +75,7 @@ namespace Better.Extensions.Runtime
             var hasAnyChanges = currentSystem.UnsubscribeRecursive(updateFunction);
             if (!hasAnyChanges)
             {
-                var message = "not found any loops for unsubscribing";
+                var message = "Not found any loops for unsubscribing";
                 Debug.LogWarning(message);
                 return;
             }
@@ -99,7 +99,7 @@ namespace Better.Extensions.Runtime
             ref var sourceSystem = ref currentSystem.GetSubSystemRecursive(sourceLoopType);
             if (sourceSystem.type != sourceLoopType)
             {
-                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(AddSubLoop)}: not found {nameof(sourceLoopType)}({sourceLoopType.Name})";
+                var message = $"Not found {nameof(sourceLoopType)}({sourceLoopType.Name})";
                 Debug.LogWarning(message);
                 return;
             }
@@ -116,7 +116,7 @@ namespace Better.Extensions.Runtime
             }
             else if (sourceSystem.HasSubSystemOf(destinationLoopType))
             {
-                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(AddSubLoop)}: {nameof(sourceLoopType)}({sourceLoopType.Name}) already contains {nameof(destinationLoopType)}{destinationLoopType}";
+                var message = $"{nameof(sourceLoopType)}({sourceLoopType.Name}) already contains {nameof(destinationLoopType)}{destinationLoopType}";
                 Debug.LogWarning(message);
                 return;
             }
