@@ -2,6 +2,9 @@
   "name": "com.uurha.betterextensions",
   "displayName": "Better Extensions",
   "description": "Unity extensions, serialize extension, async extension, string extension and UI extensions",
+  "dependencies": {
+    "com.tdw.better.internal.core": "0.0.2"
+  },
   "version": "1.5.2",
   "unity": "2020.1",
   "author": {
