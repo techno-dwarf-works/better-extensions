@@ -185,7 +185,7 @@ namespace Better.Extensions.Runtime
             var sourceSubIndex = parentSystem.FindSubSystemIndex(sourceLoopType);
             if (sourceSubIndex == -1)
             {
-                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(InsertLoopWithOffset)}: not found {nameof(sourceLoopType)}({sourceLoopType.Name})";
+                var message = $"Not found {nameof(sourceLoopType)}({sourceLoopType.Name})";
                 Debug.LogWarning(message);
                 return;
             }
@@ -202,7 +202,7 @@ namespace Better.Extensions.Runtime
             }
             else if (parentSystem.HasSubSystemOf(destinationLoopType))
             {
-                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(InsertLoopWithOffset)}: {nameof(sourceLoopType)}({sourceLoopType.Name}) already contains {nameof(destinationLoopType)}{destinationLoopType}";
+                var message = $"{nameof(sourceLoopType)}({sourceLoopType.Name}) already contains {nameof(destinationLoopType)}{destinationLoopType}";
                 Debug.LogWarning(message);
                 return;
             }
