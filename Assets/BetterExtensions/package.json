@@ -1,9 +1,12 @@
 {
   "name": "com.uurha.betterextensions",
   "displayName": "Better Extensions",
-  "description": "Unity extensions, serialize extension, async extension, string extension and UI extensions",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "unity": "2020.1",
+  "description": "Unity extensions, serialize extension, async extension, string extension and UI extensions",
+  "dependencies": {
+    "com.tdw.better.internal.core": "0.0.2"
+  },
   "author": {
     "name": "Better Plugins",
     "url": "https://github.com/techno-dwarf-works"
