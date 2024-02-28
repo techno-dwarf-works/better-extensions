@@ -43,5 +43,24 @@ namespace Better.Extensions.Runtime
             var result = Vector2.Dot(av, ab) / Vector2.Dot(ab, ab);
             return Mathf.Clamp01(result);
         }
+
+        public static Vector2 Direction(Vector2 from, Vector2 to)
+        {
+            var difference = to - from;
+            return difference.normalized;
+        }
+
+        public static float SqrDistanceTo(Vector2 from, Vector2 to)
+        {
+            var difference = to - from;
+            return difference.sqrMagnitude;
+        }
+
+        public static Vector2 Abs(Vector2 source)
+        {
+            source.x = Mathf.Abs(source.x);
+            source.y = Mathf.Abs(source.y);
+            return source;
+        }
     }
 }

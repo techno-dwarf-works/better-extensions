@@ -31,5 +31,30 @@ namespace Better.Extensions.Runtime
         {
             return Vector3Utility.Average(self);
         }
+
+        public static Vector3 Flat(this Vector3 self)
+        {
+            return Vector3Utility.Flat(self);
+        }
+
+        public static Vector3 DirectionTo(this Vector3 self, Vector3 to)
+        {
+            return Vector3Utility.Direction(self, to);
+        }
+
+        public static float DistanceTo(this Vector3 self, Vector3 to)
+        {
+            return Vector3.Distance(self, to);
+        }
+
+        public static float SqrDistanceTo(this Vector3 self, Vector3 to)
+        {
+            return Vector3Utility.SqrDistanceTo(self, to);
+        }
+
+        public static Vector3 Abs(this Vector3 self)
+        {
+            return Vector3Utility.Abs(self);
+        }
     }
 }

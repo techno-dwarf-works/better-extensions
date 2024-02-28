@@ -148,7 +148,7 @@ namespace Better.Extensions.Runtime
             return self.IsSubclassOf(type);
         }
 
-        public static bool IsSubclassOf(this Type self, IEnumerable<Type> anyTypes)
+        public static bool IsSubclassOfAny(this Type self, IEnumerable<Type> anyTypes)
         {
             if (self == null)
             {
@@ -165,6 +165,59 @@ namespace Better.Extensions.Runtime
             foreach (var anyType in anyTypes)
             {
                 if (anyType != null && self.IsSubclassOf(anyType))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsSubclassOfRawGeneric(this Type self, Type genericType)
+        {
+            if (self == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(self));
+                return false;
+            }
+
+            if (genericType == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(genericType));
+                return false;
+            }
+
+            while (self != null && self != typeof(object))
+            {
+                var definition = self.IsGenericType ? self.GetGenericTypeDefinition() : self;
+                if (genericType == definition && self != genericType)
+                {
+                    return true;
+                }
+
+                self = self.BaseType;
+            }
+
+            return false;
+        }
+        
+        public static bool IsSubclassOfAnyRawGeneric(this Type self, IEnumerable<Type> genericTypes)
+        {
+            if (self == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(self));
+                return false;
+            }
+
+            if (genericTypes == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(genericTypes));
+                return false;
+            }
+
+            foreach (var anyType in genericTypes)
+            {
+                if (anyType != null && self.IsSubclassOfRawGeneric(anyType))
                 {
                     return true;
                 }

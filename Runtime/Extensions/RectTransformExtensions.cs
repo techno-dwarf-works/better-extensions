@@ -156,5 +156,33 @@ namespace Better.Extensions.Runtime
 
             return CountCornersVisible(self, camera) > 0; // True if any corners are visible
         }
+
+        public static bool IsFullyStretched(this RectTransform self)
+        {
+            if (self == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(self));
+                return false;
+            }
+
+            return self.localScale == Vector3.one
+                   && self.anchorMin == Vector2.zero
+                   && self.anchorMax == Vector2.one
+                   && self.sizeDelta == Vector2.zero;
+        }
+
+        public static void FullyStretch(this RectTransform self)
+        {
+            if (self == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(self));
+                return;
+            }
+
+            self.LocalReset();
+            self.anchorMin = Vector2.zero;
+            self.anchorMax = Vector2.one;
+            self.sizeDelta = Vector2.zero;
+        }
     }
 }
