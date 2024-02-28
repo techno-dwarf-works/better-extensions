@@ -22,7 +22,7 @@ namespace Better.Extensions.Runtime
             ref var loopSystem = ref currentSystem.GetSubSystem(loopType);
             if (loopSystem.type != loopType)
             {
-                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(SubscribeToLoop)}: not found {nameof(loopType)}({loopType.Name})";
+                var message = $"not found {nameof(loopType)}({loopType.Name})";
                 Debug.LogWarning(message);
                 return;
             }
@@ -49,7 +49,7 @@ namespace Better.Extensions.Runtime
             var hasAnyChanges = currentSystem.UnsubscribeRecursive(loopType, updateFunction);
             if (!hasAnyChanges)
             {
-                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(UnsubscribeFromLoop)}: not found {nameof(loopType)}({loopType.Name}) for unsubscribing";
+                var message = $"not found {nameof(loopType)}({loopType.Name}) for unsubscribing";
                 Debug.LogWarning(message);
                 return;
             }
@@ -75,7 +75,7 @@ namespace Better.Extensions.Runtime
             var hasAnyChanges = currentSystem.UnsubscribeRecursive(updateFunction);
             if (!hasAnyChanges)
             {
-                var message = $"[{nameof(PlayerLoopUtility)}] {nameof(Unsubscribe)}: not found any loops for unsubscribing";
+                var message = "not found any loops for unsubscribing";
                 Debug.LogWarning(message);
                 return;
             }
