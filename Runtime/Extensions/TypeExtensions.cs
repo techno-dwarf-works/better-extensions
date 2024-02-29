@@ -259,7 +259,7 @@ namespace Better.Extensions.Runtime
             return false;
         }
 
-        public static Type GetElementType(this Type self)
+        public static Type GetCollectionElementType(this Type self)
         {
             if (self == null)
             {
