@@ -139,16 +139,12 @@ namespace Better.Extensions.Runtime
         
         public static bool IsAnonymous(this Type type)
         {
-            if (type.IsGenericType)
+            if (type.IsClass && type.IsSealed && type.Attributes.HasFlag(TypeAttributes.NotPublic))
             {
-                var d = type.GetGenericTypeDefinition();
-                if (d.IsClass && d.IsSealed && d.Attributes.HasFlag(TypeAttributes.NotPublic))
+                var attributes = type.GetCustomAttribute<CompilerGeneratedAttribute>(false);
+                if (attributes != null)
                 {
-                    var attributes = d.GetCustomAttribute<CompilerGeneratedAttribute>(false);
-                    if (attributes != null)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
 
