@@ -7,5 +7,10 @@
             var type = typeof(T);
             return type.IsNullable();
         }
+        
+        public static bool IsAnonymous<T>()
+        {
+            return typeof(T).IsAnonymous();
+        }
     }
 }
