@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using UnityObject = UnityEngine.Object;
 
 namespace Better.Extensions.Runtime
@@ -134,6 +135,24 @@ namespace Better.Extensions.Runtime
             }
 
             return self.GetAllInheritedTypes(unityObjectType);
+        }
+        
+        public static bool IsAnonymous(this Type type)
+        {
+            if (type.IsGenericType)
+            {
+                var d = type.GetGenericTypeDefinition();
+                if (d.IsClass && d.IsSealed && d.Attributes.HasFlag(TypeAttributes.NotPublic))
+                {
+                    var attributes = d.GetCustomAttribute<CompilerGeneratedAttribute>(false);
+                    if (attributes != null)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
         
         public static IEnumerable<Type> GetAllInheritedTypesOfRawGeneric(this Type self)
