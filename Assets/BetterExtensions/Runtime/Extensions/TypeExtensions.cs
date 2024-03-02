@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Better.Internal.Core.Runtime;
 using UnityObject = UnityEngine.Object;
 
 namespace Better.Extensions.Runtime
@@ -136,7 +137,7 @@ namespace Better.Extensions.Runtime
 
             return self.GetAllInheritedTypes(unityObjectType);
         }
-        
+
         public static bool IsAnonymous(this Type type)
         {
             if (type.IsClass && type.IsSealed && type.Attributes.HasFlag(TypeAttributes.NotPublic))
@@ -150,7 +151,7 @@ namespace Better.Extensions.Runtime
 
             return false;
         }
-        
+
         public static IEnumerable<Type> GetAllInheritedTypesOfRawGeneric(this Type self)
         {
             if (self == null)
@@ -233,7 +234,7 @@ namespace Better.Extensions.Runtime
 
             return false;
         }
-        
+
         public static bool IsSubclassOfAnyRawGeneric(this Type self, IEnumerable<Type> genericTypes)
         {
             if (self == null)
@@ -288,6 +289,75 @@ namespace Better.Extensions.Runtime
             }
 
             return Nullable.GetUnderlyingType(self) != null;
+        }
+
+        public static IEnumerable<MemberInfo> GetMembersRecursive(this Type type)
+        {
+            if (type == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(type));
+                return Enumerable.Empty<MemberInfo>();
+            }
+
+            var members = new HashSet<MemberInfo>(new MemberInfoComparer());
+
+            const BindingFlags methodFlags = Defines.MethodFlags & ~BindingFlags.DeclaredOnly;
+            do
+            {
+                // If the type is a constructed generic type, get the members of the generic type definition
+                var typeToReflect = type.IsGenericType && !type.IsGenericTypeDefinition ? type.GetGenericTypeDefinition() : type;
+
+                foreach (var member in typeToReflect.GetMembers(methodFlags))
+                {
+                    // For generic classes, convert members back to the constructed type
+                    var memberToAdd = type.IsGenericType && !type.IsGenericTypeDefinition
+                        ? ConvertToConstructedGenericType(member, type)
+                        : member;
+
+                    if (memberToAdd != null)
+                    {
+                        members.Add(memberToAdd);
+                    }
+                }
+
+                type = type.BaseType;
+            } while (type != null); // Continue until you reach the top of the inheritance hierarchy
+
+            return members;
+        }
+
+        private static MemberInfo ConvertToConstructedGenericType(MemberInfo memberInfo, Type constructedType)
+        {
+            // Ensure the member's declaring type is a generic type definition
+            if (memberInfo.DeclaringType != null && memberInfo.DeclaringType.IsGenericTypeDefinition)
+            {
+                var members = constructedType.GetMember(memberInfo.Name);
+                return members.FirstOrDefault();
+            }
+
+            // Return the original memberInfo if it's not a property of a generic type definition or doesn't need to be constructed
+            return memberInfo;
+        }
+
+        public static MemberInfo GetMemberByNameRecursive(this Type type, string memberName)
+        {
+            if (type == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(type));
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(memberName))
+            {
+                DebugUtility.LogException<ArgumentException>(nameof(memberName));
+                return null;
+            }
+
+            var allMembers = GetMembersRecursive(type);
+
+            // Use LINQ to find the member by name. This assumes you want the first match if there are multiple members with the same name (overloads).
+            // If you expect overloads and want to handle them differently, you might need a more complex approach.
+            return allMembers.FirstOrDefault(m => m.Name == memberName);
         }
     }
 }
