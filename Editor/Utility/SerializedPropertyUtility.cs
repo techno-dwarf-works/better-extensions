@@ -66,15 +66,14 @@ namespace Better.Extensions.EditorAddons
 
         public static CachedFieldInfo GetFieldInfoFromPropertyPath(Type type, string propertyPath)
         {
+            var arrayElement = ArrayDataWithIndexRegexAny.IsMatch(propertyPath);
+            propertyPath = ArrayDataWithIndexRegex.Replace(propertyPath, ArrayElementDotName);
             var cache = new CacheKey(type, propertyPath);
 
             if (FieldInfoFromPropertyPathCache.TryGetValue(cache, out var fieldInfoCache))
             {
                 return fieldInfoCache;
             }
-
-            var arrayElement = ArrayDataWithIndexRegexAny.IsMatch(propertyPath);
-            propertyPath = ArrayDataWithIndexRegex.Replace(propertyPath, ArrayElementDotName);
             
             if (FieldInfoFromPropertyPath(propertyPath, ref type, out var fieldInfo))
             {
