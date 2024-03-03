@@ -147,7 +147,7 @@ namespace Better.Extensions.Runtime
 
             return AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => type.IsSubclassOf(self));
+                .Where(type => self.IsAssignableFrom(type) && (type.IsClass || type.IsValueType) && !type.IsAbstract);
         }
 
         public static IEnumerable<Type> GetAllInheritedTypes(this Type self, params Type[] excludes)
