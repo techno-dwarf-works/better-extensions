@@ -41,7 +41,41 @@ namespace Better.Extensions.Runtime
             }
 
             var enumerableType = typeof(IEnumerable<>);
-            return self.IsSubclassOfRawGeneric(enumerableType);
+            return enumerableType.IsAssignableFromRawGeneric(self);
+        }
+
+        public static bool IsAssignableFromRawGeneric(this Type self, Type type)
+        {
+            if (self == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(self));
+                return false;
+            }
+
+            if (type == null)
+            {
+                DebugUtility.LogException<ArgumentNullException>(nameof(type));
+                return false;
+            }
+
+            var bufferType = type;
+            while (bufferType.BaseType != null)
+            {
+                if (bufferType.IsGeneric(self))
+                {
+                    return true;
+                }
+                
+                foreach (var subType in bufferType.GetInterfaces())
+                {
+                    if (!subType.IsGeneric(self)) continue;
+                    return true;
+                }
+
+                bufferType = bufferType.BaseType;
+            }
+
+            return false;
         }
 
         public static bool IsGeneric(this Type self, Type type)
