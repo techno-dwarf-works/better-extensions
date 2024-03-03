@@ -9,6 +9,11 @@ namespace Better.Extensions.Runtime
         {
             await self;
         }
+        
+        public static async void Forget<T>(this Task<T> self)
+        {
+            await self;
+        }
 
         public static Task WhenAll(this IEnumerable<Task> self)
         {
