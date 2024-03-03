@@ -24,7 +24,7 @@ namespace Better.Extensions.Runtime
             }
 
             var listType = typeof(List<>);
-            return self.IsGeneric(listType);
+            return listType.IsAssignableFromRawGeneric(self);
         }
 
         public static bool IsEnumerable(this Type self)
