@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Better.Extensions.Runtime
 {
-    public static class AsyncOperationAwaiterExtensions
+    public static class ResourceRequestExtensions
     {
-        public static AsyncOperationAwaiter GetAwaiter(this AsyncOperation self)
+        public static ResourceRequestAwaiter GetAwaiter(this ResourceRequest self)
         {
             if (self == null)
             {
                 throw new ArgumentNullException(nameof(self));
             }
 
-            return new AsyncOperationAwaiter(self);
+            return new ResourceRequestAwaiter(self);
         }
     }
 }
