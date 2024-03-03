@@ -41,7 +41,7 @@ namespace Better.Extensions.Runtime
             }
 
             var enumerableType = typeof(IEnumerable<>);
-            return self.IsGeneric(enumerableType);
+            return self.IsSubclassOfRawGeneric(enumerableType);
         }
 
         public static bool IsGeneric(this Type self, Type type)
