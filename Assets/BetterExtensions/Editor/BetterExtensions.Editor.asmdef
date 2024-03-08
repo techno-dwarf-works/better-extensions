@@ -2,6 +2,7 @@
     "name": "BetterExtensions.Editor",
     "rootNamespace": "Better.Extensions.EditorAddons",
     "references": [
+        "GUID:6adbd2a12d24f5d429f7ea1b1086e835",
         "GUID:01df13aca8d01e24a911bcc3e8277031",
         "GUID:28da8d3b12e3efa47928e0c9070f853d"
     ],
