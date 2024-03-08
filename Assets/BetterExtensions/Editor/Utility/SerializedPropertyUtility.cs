@@ -43,16 +43,15 @@ namespace Better.Extensions.EditorAddons
             return length < 0 ? null : propertyPath.Substring(0, length);
         }
 
-        public static bool GetTypeFromManagedReferenceFullTypeName(string managedReferenceFullTypename, out Type managedReferenceInstanceType)
+        public static bool GetTypeFromManagedReferenceFullTypeName(string managedReferenceFullTypeName, out Type managedReferenceInstanceType)
         {
-            if (managedReferenceFullTypename.IsNullOrEmpty())
+            if (managedReferenceFullTypeName.IsNullOrEmpty())
             {
-                DebugUtility.LogException<ArgumentException>(nameof(managedReferenceFullTypename));
                 managedReferenceInstanceType = null;
                 return false;
             }
 
-            var parts = managedReferenceFullTypename.Split(' ');
+            var parts = managedReferenceFullTypeName.Split(' ');
             if (parts.Length == 2)
             {
                 var assemblyPart = parts[0];
