@@ -19,7 +19,7 @@ namespace Better.Extensions.Runtime
             }
 
             var currentSystem = PlayerLoop.GetCurrentPlayerLoop();
-            ref var loopSystem = ref currentSystem.GetSubSystem(loopType);
+            ref var loopSystem = ref currentSystem.GetSubSystemRecursive(loopType);
             if (loopSystem.type != loopType)
             {
                 var message = $"Not found {nameof(loopType)}({loopType.Name})";
