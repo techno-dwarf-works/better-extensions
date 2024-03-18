@@ -203,7 +203,7 @@ namespace Better.Extensions.Runtime
                 result = true;
             }
 #else
-                    loopSystem.updateDelegate -= updateFunction;
+                    self.updateDelegate -= updateFunction;
                     result = true;
 #endif
 
@@ -235,7 +235,7 @@ namespace Better.Extensions.Runtime
                     result = true;
                 }
 #else
-                    loopSystem.updateDelegate -= updateFunction;
+                    self.updateDelegate -= updateFunction;
                     result = true;
 #endif
             }
